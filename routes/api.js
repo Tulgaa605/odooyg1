@@ -10,6 +10,7 @@ const categoryController = require('../controllers/categoryController');
 const postController = require('../controllers/postController');
 const commentController = require('../controllers/commentController');
 const likeController = require('../controllers/likeController');
+const searchController = require('../controllers/searchController');
 
 // Multer тохиргоо
 const storage = multer.diskStorage({
@@ -34,12 +35,16 @@ router.get('/categories', authMiddleware, categoryController.getCategories);
 
 // Post routes (токен шаардлагатай)
 router.get('/posts', authMiddleware, postController.getPosts);
-router.post('/posts', authMiddleware, upload.single('image'), postController.createPost);
+router.post('/posts', authMiddleware, upload.array('images', 10), postController.createPost);
 
 // Comment routes (токен шаардлагатай)
 router.post('/comments', authMiddleware, commentController.createComment);
 
 // Like routes (токен шаардлагатай)
 router.post('/likes', authMiddleware, likeController.likePost);
+router.delete('/likes/:postId', authMiddleware, likeController.unlikePost);
+
+// Search routes
+router.get('/search', authMiddleware, searchController.search);
 
 module.exports = router;
