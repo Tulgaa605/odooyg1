@@ -25,5 +25,5 @@ app.use('/api', apiRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Server running on http://192.168.88.230:${PORT}`);
+  console.log(`Server running on http://192.168.88.201:${PORT}`);
 });

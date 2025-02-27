@@ -28,7 +28,7 @@ exports.createPost = async (req, res) => {
     
     // Зургийн URL-ийг бүрэн замтай үүсгэх
     const images = req.files 
-      ? req.files.map(file => `http://192.168.88.230:5000/uploads/${file.filename}`)
+      ? req.files.map(file => `http://192.168.88.201:5000/uploads/${file.filename}`)
       : [];
 
     console.log('Image URLs:', images); // Logging for debugging
