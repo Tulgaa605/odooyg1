@@ -11,6 +11,7 @@ const postController = require('../controllers/postController');
 const commentController = require('../controllers/commentController');
 const likeController = require('../controllers/likeController');
 const searchController = require('../controllers/searchController');
+const paymentController = require('../controllers/paymentController');
 
 // Multer тохиргоо
 const storage = multer.diskStorage({
@@ -46,5 +47,9 @@ router.delete('/likes/:postId', authMiddleware, likeController.unlikePost);
 
 // Search routes
 router.get('/search', authMiddleware, searchController.search);
+
+// Payment routes
+router.post('/payments/create', paymentController.createPayment);
+router.post('/webhook', paymentController.handleWebhook);
 
 module.exports = router;

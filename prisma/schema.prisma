@@ -18,6 +18,7 @@ model User {
   posts        Post[]
   comments     Comment[]
   likes        Like[]
+  payments     Payment[]
 }
 
 model Product {
@@ -75,4 +76,17 @@ model Like {
   createdAt DateTime @default(now())
 
   @@unique([userId, postId])
+}
+
+model Payment {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId      String   @db.ObjectId
+  user        User     @relation(fields: [userId], references: [id])
+  amount      Float
+  status      String   // pending, completed, failed
+  invoiceId   String?  // Khan bank invoice ID
+  orderId     String?  // Your system order ID
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
